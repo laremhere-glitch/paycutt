@@ -77,31 +77,34 @@ export default function Paycutt() {
   return (
     <div style={{
       minHeight: "100vh",
+      height: "100%",
       background: "#0a0a0a",
       color: "#f0f0f0",
-      fontFamily: "'Inter', sans-serif",
-      padding: "32px 16px",
+      fontFamily: "'Inter', -apple-system, sans-serif",
+      padding: "24px 16px 40px",
+      boxSizing: "border-box",
+      WebkitTextSizeAdjust: "100%",
     }}>
-      <div style={{ maxWidth: 560, margin: "0 auto" }}>
+      <div style={{ maxWidth: 500, margin: "0 auto", width: "100%" }}>
 
         {/* Header */}
-        <div style={{ marginBottom: 36 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6 }}>
+        <div style={{ marginBottom: 24 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
             <span style={{
               background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
-              borderRadius: 10,
-              padding: "4px 12px",
-              fontSize: 18,
+              borderRadius: 8,
+              padding: "3px 10px",
+              fontSize: 15,
               fontWeight: 800,
-              letterSpacing: -0.5,
               color: "#fff",
+              letterSpacing: -0.3,
             }}>Paycutt</span>
-            <span style={{ fontSize: 11, color: "#444", letterSpacing: 2, textTransform: "uppercase" }}>by Paycutt</span>
+            <span style={{ fontSize: 10, color: "#444", letterSpacing: 2, textTransform: "uppercase" }}>by paycutt</span>
           </div>
-          <h1 style={{ fontSize: 26, fontWeight: 700, margin: "8px 0 6px", lineHeight: 1.2 }}>
+          <h1 style={{ fontSize: 22, fontWeight: 700, margin: "0 0 4px", lineHeight: 1.2 }}>
             Paycheck Splitter
           </h1>
-          <p style={{ color: "#555", fontSize: 14, margin: 0 }}>
+          <p style={{ color: "#555", fontSize: 13, margin: 0 }}>
             Put your income in. Know exactly where every dollar goes.
           </p>
         </div>
@@ -110,14 +113,14 @@ export default function Paycutt() {
         <div style={{
           background: "#111",
           border: "1px solid #1e1e1e",
-          borderRadius: 16,
-          padding: "20px 24px",
-          marginBottom: 20,
+          borderRadius: 14,
+          padding: "16px",
+          marginBottom: 16,
         }}>
-          <label style={{ fontSize: 11, color: "#555", letterSpacing: 2, textTransform: "uppercase" }}>
+          <label style={{ fontSize: 10, color: "#555", letterSpacing: 2, textTransform: "uppercase" }}>
             Monthly Income
           </label>
-          <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 10 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 8 }}>
             <select
               value={currency.label}
               onChange={e => setCurrency(CURRENCIES.find(c => c.label === e.target.value))}
@@ -126,10 +129,11 @@ export default function Paycutt() {
                 border: "1px solid #2a2a2a",
                 borderRadius: 8,
                 color: "#f0f0f0",
-                padding: "10px 10px",
-                fontSize: 13,
+                padding: "10px 6px",
+                fontSize: 12,
                 cursor: "pointer",
                 flexShrink: 0,
+                WebkitAppearance: "none",
               }}
             >
               {CURRENCIES.map(c => (
@@ -138,6 +142,7 @@ export default function Paycutt() {
             </select>
             <input
               type="number"
+              inputMode="decimal"
               placeholder="0.00"
               value={income}
               onChange={e => setIncome(e.target.value)}
@@ -147,11 +152,12 @@ export default function Paycutt() {
                 border: "1px solid #2a2a2a",
                 borderRadius: 8,
                 color: "#f0f0f0",
-                padding: "10px 16px",
-                fontSize: 22,
+                padding: "10px 12px",
+                fontSize: 20,
                 fontWeight: 600,
                 outline: "none",
                 width: "100%",
+                boxSizing: "border-box",
               }}
             />
           </div>
@@ -162,28 +168,27 @@ export default function Paycutt() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          marginBottom: 10,
-          padding: "0 4px",
+          marginBottom: 8,
         }}>
-          <span style={{ fontSize: 11, color: "#444", letterSpacing: 2 }}>ALLOCATION</span>
+          <span style={{ fontSize: 10, color: "#444", letterSpacing: 2 }}>ALLOCATION</span>
           <span style={{
-            fontSize: 12,
+            fontSize: 11,
             fontWeight: 600,
             color: remaining === 0 ? "#10b981" : remaining < 0 ? "#ef4444" : "#f59e0b",
             background: remaining === 0 ? "#10b98115" : remaining < 0 ? "#ef444415" : "#f59e0b15",
-            padding: "4px 10px",
+            padding: "3px 10px",
             borderRadius: 20,
           }}>
-            {total}% {remaining === 0 ? "✓ Perfect" : remaining > 0 ? `· ${remaining}% unallocated` : `· ${Math.abs(remaining)}% over`}
+            {total}% {remaining === 0 ? "✓ Perfect" : remaining > 0 ? `· ${remaining}% left` : `· ${Math.abs(remaining)}% over`}
           </span>
         </div>
 
         {/* Progress bar */}
         <div style={{
-          height: 5,
+          height: 4,
           background: "#1a1a1a",
           borderRadius: 99,
-          marginBottom: 16,
+          marginBottom: 12,
           overflow: "hidden",
           display: "flex",
         }}>
@@ -197,16 +202,16 @@ export default function Paycutt() {
         </div>
 
         {/* Categories */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 12 }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 7, marginBottom: 10 }}>
           {categories.map(cat => (
             <div key={cat.id} style={{
               background: "#111",
               border: "1px solid #1a1a1a",
-              borderRadius: 14,
-              padding: "13px 16px",
+              borderRadius: 12,
+              padding: "11px 12px",
               display: "flex",
               alignItems: "center",
-              gap: 10,
+              gap: 8,
               borderLeft: `3px solid ${cat.color}`,
             }}>
               <input
@@ -217,39 +222,40 @@ export default function Paycutt() {
                   background: "transparent",
                   border: "none",
                   color: "#e0e0e0",
-                  fontSize: 14,
+                  fontSize: 13,
                   fontWeight: 500,
                   outline: "none",
                   minWidth: 0,
                 }}
               />
-              <div style={{ display: "flex", alignItems: "center", gap: 4, flexShrink: 0 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 3, flexShrink: 0 }}>
                 <input
                   type="number"
+                  inputMode="numeric"
                   value={cat.percent}
                   onChange={e => updatePercent(cat.id, e.target.value)}
                   min={0}
                   max={100}
                   style={{
-                    width: 46,
+                    width: 42,
                     background: "#1a1a1a",
                     border: "1px solid #252525",
-                    borderRadius: 8,
+                    borderRadius: 7,
                     color: "#f0f0f0",
-                    padding: "6px 6px",
-                    fontSize: 14,
+                    padding: "5px 4px",
+                    fontSize: 13,
                     fontWeight: 600,
                     textAlign: "center",
                     outline: "none",
                   }}
                 />
-                <span style={{ color: "#333", fontSize: 12 }}>%</span>
+                <span style={{ color: "#333", fontSize: 11 }}>%</span>
               </div>
               <div style={{
-                fontSize: 13,
+                fontSize: 12,
                 fontWeight: 600,
                 color: cat.color,
-                minWidth: 75,
+                minWidth: 68,
                 textAlign: "right",
                 flexShrink: 0,
               }}>
@@ -260,16 +266,14 @@ export default function Paycutt() {
                 style={{
                   background: "none",
                   border: "none",
-                  color: "#2a2a2a",
+                  color: "#333",
                   cursor: "pointer",
-                  fontSize: 18,
+                  fontSize: 16,
                   padding: "0 2px",
                   lineHeight: 1,
                   flexShrink: 0,
                 }}
-              >
-                ×
-              </button>
+              >×</button>
             </div>
           ))}
         </div>
@@ -281,12 +285,12 @@ export default function Paycutt() {
             width: "100%",
             background: "transparent",
             border: "1px dashed #222",
-            borderRadius: 14,
+            borderRadius: 12,
             color: "#333",
-            padding: "13px",
-            fontSize: 13,
+            padding: "11px",
+            fontSize: 12,
             cursor: "pointer",
-            marginBottom: 28,
+            marginBottom: 20,
           }}
         >
           + Add Category
@@ -297,39 +301,38 @@ export default function Paycutt() {
           <div style={{
             background: "#0d0d1a",
             border: "1px solid #1a1a2e",
-            borderRadius: 16,
-            padding: "20px 24px",
-            marginBottom: 28,
+            borderRadius: 14,
+            padding: "16px",
+            marginBottom: 20,
           }}>
-            <p style={{ fontSize: 11, color: "#6366f1", letterSpacing: 2, textTransform: "uppercase", marginBottom: 16, marginTop: 0 }}>
+            <p style={{ fontSize: 10, color: "#6366f1", letterSpacing: 2, textTransform: "uppercase", marginBottom: 12, marginTop: 0 }}>
               Monthly Breakdown
             </p>
             {categories.map(cat => (
               <div key={cat.id} style={{
                 display: "flex",
                 justifyContent: "space-between",
-                marginBottom: 10,
-                fontSize: 14,
+                marginBottom: 8,
+                fontSize: 13,
               }}>
                 <span style={{ color: "#666" }}>{cat.name}</span>
                 <span style={{ fontWeight: 600, color: cat.color }}>{getAmount(cat.percent)}</span>
               </div>
             ))}
-            <div style={{ borderTop: "1px solid #1a1a1a", marginTop: 14, paddingTop: 14, display: "flex", justifyContent: "space-between" }}>
-              <span style={{ color: "#555", fontSize: 13 }}>Total Income</span>
-              <span style={{ fontWeight: 700, fontSize: 15 }}>
+            <div style={{ borderTop: "1px solid #1a1a1a", marginTop: 10, paddingTop: 10, display: "flex", justifyContent: "space-between" }}>
+              <span style={{ color: "#555", fontSize: 12 }}>Total Income</span>
+              <span style={{ fontWeight: 700, fontSize: 14 }}>
                 {currency.symbol}{parseFloat(income).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </span>
             </div>
           </div>
         )}
 
-        {/* Footer */}
-        <p style={{ textAlign: "center", color: "#222", fontSize: 11, marginTop: 8 }}>
+        <p style={{ textAlign: "center", color: "#222", fontSize: 10, margin: 0 }}>
           Paycutt · Stop guessing where your money goes
         </p>
 
       </div>
     </div>
   );
-                  }
+}
