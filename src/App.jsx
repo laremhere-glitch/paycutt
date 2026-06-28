@@ -347,4 +347,4 @@ export default function Paycutt() {
               </div>
 
               {/* Progress bar */}
-              <div style={
+              <div style={ 
